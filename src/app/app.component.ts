@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { BookCardComponent } from './book-card/book-card.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [BookCardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-intensiv-2025-05';
+  title = 'hallo';
 }
