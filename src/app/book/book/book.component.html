@@ -1,0 +1,10 @@
+<div>
+  <input (input)="updateBookSearchTerm($event)">
+</div>
+
+@for (book of books | bookFilter: bookSearchTerm; track book.title) {
+  <app-book-card
+    [content]="book"
+    (detailClick)="goToBookDetails($event)"
+  />
+}
