@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './book-card.component.scss'
 })
 export class BookCardComponent {
-
+  customStyle = {
+    color: 'red',
+    fontStyle: 'italic'
+  };
+  headerClass = 'sans';
 }
