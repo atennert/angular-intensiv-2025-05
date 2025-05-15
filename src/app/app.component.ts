@@ -11,11 +11,23 @@ import { Book } from './book';
 export class AppComponent {
   title = 'hallo';
 
-  readonly book: Book = {
-    title: 'Moby Dick',
-    author: 'Herman Melville',
-    abstract: 'A brilliant novel telling the story of Captain Ahab & ...'
-  }
+  readonly books: Book[] = [
+    {
+      title: 'How to win friends',
+      author: 'Dale Carnegie',
+      abstract: "How to Win Friends and Influence ..."
+    },
+    {
+      title: 'The Willpower Instinct: How Self-Control Works ...',
+      author: 'Kelly McGonigal',
+      abstract: 'Based on Stanford University ...'
+    },
+    {
+      author: 'Simon Sinek',
+      title: 'Start with WHY',
+      abstract: "START WITH WHY shows that the leaders who've ..."
+    }
+  ];
 
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
