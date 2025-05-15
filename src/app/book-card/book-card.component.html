@@ -1,6 +1,6 @@
-<h3 [class]="headerClass">Moby Dick</h3>
-<h4 [style]="customStyle">Herman Melville</h4>
+<h3 [class]="headerClass">{{ content().title }}</h3>
+<h4 [style]="customStyle">{{ content().author }}</h4>
 
 <a href="#">Details</a>
 
-<p>A brilliant novel telling the story of Captain Ahab & ...</p>
+<p>{{ content().abstract }}</p>

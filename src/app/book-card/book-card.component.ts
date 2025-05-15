@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-book-card',
@@ -12,4 +12,6 @@ export class BookCardComponent {
     fontStyle: 'italic'
   };
   headerClass = 'sans';
+
+  readonly content = input<any>();
 }

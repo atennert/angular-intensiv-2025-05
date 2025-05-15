@@ -9,4 +9,10 @@ import { BookCardComponent } from './book-card/book-card.component';
 })
 export class AppComponent {
   title = 'hallo';
+
+  readonly book = {
+    title: 'Moby Dick',
+    author: 'Herman Melville',
+    abstract: 'A brilliant novel telling the story of Captain Ahab & ...'
+  }
 }
