@@ -1,6 +1,9 @@
 <h3 [class]="headerClass">{{ content().title }}</h3>
 <h4 [style]="customStyle">{{ content().author }}</h4>
 
-<a href="#">Details</a>
+<a
+  href="#"
+  (click)="handleDetailClick($event)"
+>Details</a>
 
 <p>{{ content().abstract }}</p>

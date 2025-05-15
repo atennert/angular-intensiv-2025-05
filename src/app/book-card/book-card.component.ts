@@ -15,4 +15,10 @@ export class BookCardComponent {
   headerClass = 'sans';
 
   readonly content = input.required<Book>();
+
+  handleDetailClick(clickEvent: MouseEvent) {
+    clickEvent.preventDefault();
+
+    console.log(clickEvent);
+  }
 }
