@@ -1,1 +1,4 @@
-<app-book-card [content]="book" />
+<app-book-card
+  [content]="book"
+  (detailClick)="goToBookDetails($event)"
+/>

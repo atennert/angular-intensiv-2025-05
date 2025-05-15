@@ -16,4 +16,9 @@ export class AppComponent {
     author: 'Herman Melville',
     abstract: 'A brilliant novel telling the story of Captain Ahab & ...'
   }
+
+  goToBookDetails(book: Book) {
+    console.log('Navigate to book details, soon...');
+    console.table(book);
+  }
 }
