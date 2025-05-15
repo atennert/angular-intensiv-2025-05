@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookCardComponent } from './book-card/book-card.component';
+import { Book } from './book';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { BookCardComponent } from './book-card/book-card.component';
 export class AppComponent {
   title = 'hallo';
 
-  readonly book = {
+  readonly book: Book = {
     title: 'Moby Dick',
     author: 'Herman Melville',
     abstract: 'A brilliant novel telling the story of Captain Ahab & ...'

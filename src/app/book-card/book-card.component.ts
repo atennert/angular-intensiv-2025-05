@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-book-card',
@@ -13,5 +14,5 @@ export class BookCardComponent {
   };
   headerClass = 'sans';
 
-  readonly content = input<any>();
+  readonly content = input.required<Book>();
 }
