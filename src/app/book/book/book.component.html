@@ -2,7 +2,7 @@
   <input (input)="updateBookSearchTerm($event)">
 </div>
 
-@for (book of books | bookFilter: bookSearchTerm; track book.title) {
+@for (book of books | bookFilter: bookSearchTerm; track book.isbn) {
   <app-book-card
     [content]="book"
     (detailClick)="goToBookDetails($event)"
