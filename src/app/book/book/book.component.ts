@@ -25,7 +25,7 @@ export class BookComponent {
   readonly bookApi = inject(BookApiService);
   readonly filterService = inject(BookFilterService);
 
-  readonly books: Signal<Book[]> = toSignal(this.bookApi.getAll(), { initialValue: [] });
+  readonly books: Signal<Book[] | undefined> = toSignal(this.bookApi.getAll());
 
   readonly bookSearchTerm: WritableSignal<string> = signal('');
 

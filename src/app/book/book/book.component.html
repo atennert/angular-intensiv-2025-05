@@ -2,13 +2,16 @@
   <input (input)="updateBookSearchTerm($event)">
 </div>
 
-@let books = filteredBooks();
-<p># of books: {{ books.length }}</p>
-@for (book of books; track book.isbn) {
-  <app-book-card
-    [content]="book"
-    (detailClick)="goToBookDetails($event)"
-  />
-} @empty {
-  <p>No books found</p>
+@defer (when books()) {
+  <p># of books: {{ filteredBooks().length }}</p>
+  @for (book of filteredBooks(); track book.isbn) {
+    <app-book-card
+      [content]="book"
+      (detailClick)="goToBookDetails($event)"
+    />
+  } @empty {
+    <p>No books found.</p>
+  }
+} @placeholder (minimum 500ms) {
+  <p>Loading...</p>
 }
