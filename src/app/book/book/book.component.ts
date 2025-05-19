@@ -1,4 +1,13 @@
-import { Component, computed, effect, inject, signal, Signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  Signal,
+  WritableSignal
+} from '@angular/core';
 import { Book } from '../book';
 import { BookCardComponent } from '../book-card/book-card.component';
 import { BookApiService } from '../book-api.service';
@@ -10,6 +19,7 @@ import { BookFilterService } from '../book-filter/book-filter.service';
   imports: [BookCardComponent],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookComponent {
   readonly bookApi = inject(BookApiService);
