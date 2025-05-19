@@ -2,9 +2,9 @@
   <input (input)="updateBookSearchTerm($event)">
 </div>
 
-@let books = books$ | async;
-<p># of books: {{ books?.length }}</p>
-@for (book of books | bookFilter: bookSearchTerm; track book.isbn) {
+@let books = filteredBooks();
+<p># of books: {{ books.length }}</p>
+@for (book of books; track book.isbn) {
   <app-book-card
     [content]="book"
     (detailClick)="goToBookDetails($event)"

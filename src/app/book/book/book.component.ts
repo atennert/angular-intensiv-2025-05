@@ -1,23 +1,30 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { Book } from '../book';
 import { BookCardComponent } from '../book-card/book-card.component';
-import { BookFilterPipe } from '../book-filter/book-filter.pipe';
 import { BookApiService } from '../book-api.service';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { BookFilterService } from '../book-filter/book-filter.service';
 
 @Component({
   selector: 'app-book',
-  imports: [BookCardComponent, BookFilterPipe, AsyncPipe],
+  imports: [BookCardComponent],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss',
 })
 export class BookComponent {
   readonly bookApi = inject(BookApiService);
+  readonly filterService = inject(BookFilterService);
 
-  books$: Observable<Book[]> = this.bookApi.getAll();
+  readonly books: Signal<Book[]> = toSignal(this.bookApi.getAll(), { initialValue: [] });
 
-  bookSearchTerm = '';
+  readonly bookSearchTerm: WritableSignal<string> = signal('');
+
+  readonly filteredBooks = computed<Book[]>(() => {
+    return this.filterService.filter(this.books(), this.bookSearchTerm())
+  });
+
+  readonly logBookCount = effect(() => console.log(`Books: ${this.filteredBooks().length}`));
+
 
   goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
@@ -26,6 +33,6 @@ export class BookComponent {
 
   updateBookSearchTerm(inputEvent: Event) {
     const inputElement = inputEvent.target as HTMLInputElement;
-    this.bookSearchTerm = inputElement.value;
+    this.bookSearchTerm.set(inputElement.value);
   }
 }
