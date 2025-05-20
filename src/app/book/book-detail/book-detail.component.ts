@@ -1,9 +1,8 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, inject, input, OnInit, Signal } from '@angular/core';
 import { BookApiService } from '../book-api.service';
 import { switchMap } from 'rxjs';
 import { Book } from '../book';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-book-detail',
@@ -12,12 +11,13 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './book-detail.component.scss'
 })
 export class BookDetailComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute);
   private readonly bookApi = inject(BookApiService);
 //  private readonly destroyRef = inject(DestroyRef);
 
-  readonly book: Signal<Book | undefined> = toSignal(this.route.params.pipe(
-    switchMap((params: Params) => this.bookApi.getBookByIsbn(params['isbn'])),
+  readonly isbn = input.required<string>();
+
+  readonly book: Signal<Book | undefined> = toSignal(toObservable(this.isbn).pipe(
+    switchMap((isbn) => this.bookApi.getBookByIsbn(isbn)),
   ));
 
   ngOnInit() {
