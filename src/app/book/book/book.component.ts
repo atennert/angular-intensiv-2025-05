@@ -13,6 +13,7 @@ import { BookCardComponent } from '../book-card/book-card.component';
 import { BookApiService } from '../book-api.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BookFilterService } from '../book-filter/book-filter.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -24,6 +25,7 @@ import { BookFilterService } from '../book-filter/book-filter.service';
 export class BookComponent {
   readonly bookApi = inject(BookApiService);
   readonly filterService = inject(BookFilterService);
+  readonly router = inject(Router);
 
   readonly books: Signal<Book[]> = toSignal(this.bookApi.getAll(), { initialValue: [] });
 
@@ -36,9 +38,11 @@ export class BookComponent {
   readonly logBookCount = effect(() => console.log(`Books: ${this.filteredBooks().length}`));
 
 
-  goToBookDetails(book: Book) {
+  async goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
     console.table(book);
+
+    await this.router.navigate(['books', 'detail', book.isbn]);
   }
 
   updateBookSearchTerm(inputEvent: Event) {

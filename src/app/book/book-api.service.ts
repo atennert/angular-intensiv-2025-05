@@ -9,7 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export class BookApiService {
   private readonly http = inject(HttpClient)
 
+  private readonly baseUrl = 'http://localhost:4730';
+
   getAll(): Observable<Book[]> {
-    return this.http.get<Book[]>(`http://localhost:4730/books`).pipe(share());
+    return this.http.get<Book[]>(`${this.baseUrl}/books`).pipe(share());
+  }
+
+  getBookByIsbn(isbn: string): Observable<Book> {
+    return this.http.get<Book>(`${this.baseUrl}/books/${isbn}`);
   }
 }
