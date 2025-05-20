@@ -1,3 +1,11 @@
 <app-navigation/>
 
+<div>
+  @if (userState.isLoggedIn()) {
+    <button (click)="userState.logout()">Logout</button>
+  } @else {
+    <button (click)="userState.login()">Login</button>
+  }
+</div>
+
 <router-outlet/>

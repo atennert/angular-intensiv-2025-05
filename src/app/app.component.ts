@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
+import { UserStateService } from './user-state.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,5 @@ import { NavigationComponent } from './navigation/navigation.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-
+  readonly userState = inject(UserStateService);
 }
