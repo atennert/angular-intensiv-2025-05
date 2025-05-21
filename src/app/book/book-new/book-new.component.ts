@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BookForm } from './book-form.interface';
+import { BookApiService } from '../book-api.service';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-book-new',
@@ -10,6 +12,9 @@ import { BookForm } from './book-form.interface';
 })
 export class BookNewComponent {
   private readonly fb = inject(FormBuilder).nonNullable;
+  private readonly bookApi = inject(BookApiService);
+
+  isSaving = false;
 
   readonly form: FormGroup<BookForm> = this.fb.group<BookForm>({
     isbn: this.fb.control('', [Validators.required]),
@@ -20,6 +25,12 @@ export class BookNewComponent {
   });
 
   submit() {
-    console.log(this.form);
+    this.isSaving = true;
+    this.bookApi.create(this.form.value as Book).subscribe({
+      next: () => {
+        this.form.reset();
+        this.isSaving = false;
+      },
+    });
   }
 }

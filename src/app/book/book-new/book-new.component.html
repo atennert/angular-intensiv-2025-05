@@ -30,5 +30,11 @@
     Abstract
   </label>
 
-  <button type="submit" [disabled]="form.invalid">Save</button>
+  <button type="submit" [disabled]="form.invalid || isSaving">
+    @if (isSaving) {
+      Saving
+    } @else {
+      Save
+    }
+  </button>
 </form>
