@@ -13,6 +13,9 @@
     @if(form.get('author')?.touched && form.hasError('required', 'author')){
       <br><small class="error">Please insert an author.</small>
     }
+    @if(form.get('author')?.touched && form.hasError('invalidAuthor', 'author')){
+      <br><small class="error">Please insert a correct author (sorry Musk-relatives).</small>
+    }
   </label>
   <label class="text-label">
     <input type="text" formControlName="title">
