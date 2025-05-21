@@ -13,11 +13,11 @@ import { BookCardComponent } from '../book-card/book-card.component';
 import { BookApiService } from '../book-api.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BookFilterService } from '../book-filter/book-filter.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-book',
-  imports: [BookCardComponent],
+  imports: [BookCardComponent, RouterLink],
   templateUrl: './book.component.html',
   styleUrl: './book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

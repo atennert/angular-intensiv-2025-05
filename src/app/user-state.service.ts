@@ -4,7 +4,7 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root'
 })
 export class UserStateService {
-  private readonly _isLoggedIn = signal<boolean>(false);
+  private readonly _isLoggedIn = signal<boolean>(true);
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
 
   login() {

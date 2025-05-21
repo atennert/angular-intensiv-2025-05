@@ -2,6 +2,10 @@
   <input (input)="updateBookSearchTerm($event)">
 </div>
 
+<div>
+  <a routerLink="new">New book</a>
+</div>
+
 @let books = filteredBooks();
 <p># of books: {{ books.length }}</p>
 @for (book of books; track book.isbn) {
