@@ -4,16 +4,16 @@ import {
   computed,
   effect,
   inject,
+  OnInit,
   signal,
   Signal,
   WritableSignal
 } from '@angular/core';
 import { Book } from '../book';
 import { BookCardComponent } from '../book-card/book-card.component';
-import { BookApiService } from '../book-api.service';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { BookFilterService } from '../book-filter/book-filter.service';
 import { Router, RouterLink } from '@angular/router';
+import { bookStore } from '../book.store';
 
 @Component({
   selector: 'app-book',
@@ -22,12 +22,12 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BookComponent {
-  readonly bookApi = inject(BookApiService);
+export class BookComponent implements OnInit {
+  readonly bookStore = inject(bookStore);
   readonly filterService = inject(BookFilterService);
   readonly router = inject(Router);
 
-  readonly books: Signal<Book[]> = toSignal(this.bookApi.getAll(), { initialValue: [] });
+  readonly books: Signal<Book[]> = this.bookStore.books;
 
   readonly bookSearchTerm: WritableSignal<string> = signal('');
 
@@ -37,6 +37,9 @@ export class BookComponent {
 
   readonly logBookCount = effect(() => console.log(`Books: ${this.filteredBooks().length}`));
 
+  ngOnInit() {
+    this.bookStore.getAll();
+  }
 
   async goToBookDetails(book: Book) {
     console.log('Navigate to book details, soon...');
