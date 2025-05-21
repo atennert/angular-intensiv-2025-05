@@ -3,14 +3,23 @@
   <label class="text-label">
     <input type="text" formControlName="isbn">
     ISBN
+    @if(form.get('isbn')?.touched && form.hasError('required', 'isbn')){
+      <br><small class="error">Please insert an ISBN.</small>
+    }
   </label>
   <label class="text-label">
     <input type="text" formControlName="author">
     Author
+    @if(form.get('author')?.touched && form.hasError('required', 'author')){
+      <br><small class="error">Please insert an author.</small>
+    }
   </label>
   <label class="text-label">
     <input type="text" formControlName="title">
     Title
+    @if(form.get('title')?.touched && form.hasError('required', 'title')){
+      <br><small class="error">Please insert a title.</small>
+    }
   </label>
   <label class="text-label">
     <input type="text" formControlName="subtitle">
@@ -21,5 +30,5 @@
     Abstract
   </label>
 
-  <button type="submit">Save</button>
+  <button type="submit" [disabled]="form.invalid">Save</button>
 </form>
